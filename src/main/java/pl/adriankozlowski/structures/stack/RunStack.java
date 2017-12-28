@@ -2,6 +2,9 @@ package pl.adriankozlowski.structures.stack;
 
 import java.util.Scanner;
 
+/**
+ * Copyright
+ */
 public class RunStack {
     public static void menu() {
         System.out.println("(0) Menu\n(1) PUSH\n(2) POP\n(3) SHOW");
