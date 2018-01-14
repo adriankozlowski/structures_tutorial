@@ -177,4 +177,41 @@ public class BST {
                 System.out.println("-");
         }
     }
+    public void remove (Integer key, Node pos)
+    {
+        if (pos == null) return;
+        if (key.compareTo(pos.key)<0)
+            remove (key, pos.left);
+        else if (key.compareTo(pos.key)>0)
+            remove (key, pos.right);
+        else {
+            if (pos.left != null && pos.right != null)
+            {
+                Node maxFromLeft = findMax(pos.left); //need to make a findMax helper
+                pos.key = maxFromLeft.key;
+                remove (maxFromLeft.key, pos.left);
+            }
+            else if(pos.left != null) {
+                Node trash = pos;
+                pos = pos.left;
+                trash = null;
+            }
+            else if(pos.right != null) {
+                Node trash = pos;
+                pos = pos.right;
+                trash = null;
+            }
+            else {
+                pos = null;
+            }
+        }
+    }
+
+    private Node findMax(Node node) {
+        if(node.right == null){
+            return node;
+        }else {
+            return findMax(node.right);
+        }
+    }
 }
