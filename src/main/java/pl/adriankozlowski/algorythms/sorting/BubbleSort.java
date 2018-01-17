@@ -1,6 +1,6 @@
 package pl.adriankozlowski.algorythms.sorting;
 
-public class Sorting {
+public class BubbleSort {
     /**
      * Wersja najprostsza i najbardziej nieoptymalna.
      *
