@@ -1,5 +1,8 @@
 package pl.adriankozlowski.algorythms.sorting;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class Mergesort {
     private int[] numbers;
     private int[] helper;
@@ -25,6 +28,21 @@ public class Mergesort {
             // Combine them both
             merge(low, middle, high);
         }
+    }
+
+    public static void main(String[] args) {
+        Random random = new Random();
+        int[] ints = new int[10];
+        for (int i = 0; i < ints.length; i++) {
+            ints[i] = random.nextInt(20);
+        }
+
+        System.out.println(Arrays.toString(ints));
+        Mergesort mergesort = new Mergesort();
+        mergesort.sort(ints);
+
+        System.out.println(Arrays.toString(ints));
+
     }
 
     private void merge(int low, int middle, int high) {
