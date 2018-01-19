@@ -1,11 +1,36 @@
 package pl.adriankozlowski.algorythms.sorting;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class Quick {
 
-    private static int tablica[];
-    private static int ile_liczb;
+    private int tablica[];
+    private int ile_liczb;
 
-    private static void quicksort(int tablica[], int x, int y) {
+    public Quick(int tablica[]) {
+        this.tablica = tablica;
+    }
+
+    public static void main(String[] args) {
+        Random random = new Random();
+        int[] ints = new int[10];
+        for (int i = 0; i < ints.length; i++) {
+            ints[i] = random.nextInt(20);
+        }
+
+        System.out.println(Arrays.toString(ints));
+        Quick quick = new Quick(ints);
+        quick.sort();
+
+        System.out.println(Arrays.toString(ints));
+    }
+
+    public void sort() {
+        quicksort(tablica, 0, tablica.length - 1);
+    }
+
+    private void quicksort(int tablica[], int x, int y) {
 
         int i, j, v, temp;
 
