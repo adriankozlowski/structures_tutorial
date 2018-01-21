@@ -4,10 +4,12 @@ package pl.adriankozlowski.structures.bst;
  * Klasa węzeł - która jest używana jako struktura
  */
 public class Node {
-    int key;
-    Node left, right, parent = null;
+    public int key;
+    public Node left;
+    public Node right;
+    public Node parent;
 
-    Node(int key) {
+    public Node(int key) {
         this.key = key;
     }
 }

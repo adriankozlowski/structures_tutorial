@@ -3,6 +3,13 @@ package pl.adriankozlowski.structures.bst;
 public class BST {
     private Node root = null;      // korzeń naszego drzewa
 
+    public static void main(String[] args) {
+        BST bst = new BST();
+        bst.insert(8);
+        bst.insert(7);
+        bst.insert(6);
+    }
+
     /**
      * Dodawanie elementów
      */
