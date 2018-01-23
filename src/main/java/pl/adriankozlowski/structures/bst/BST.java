@@ -1,22 +1,147 @@
 package pl.adriankozlowski.structures.bst;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BST {
     private Node root = null;      // korzeń naszego drzewa
+    int depth = 0;
 
     public static void main(String[] args) {
         BST bst = new BST();
         bst.insert(8);
-        bst.insert(7);
         bst.insert(6);
+        bst.insert(7);
+        bst.insert(5);
+        bst.insert(9);
+        int d = bst.dept(bst.root);
+        print(bst.root);
+    }
+
+    /**
+     * Rysowanie drzewa:
+     * 8
+     * ┌─────┴─────┐
+     * 6           9
+     * ┌──┴──┐
+     * 5     7
+     * <p>
+     * Process finished with exit code 0
+     *
+     * @param root
+     */
+    public static void print(Node root) {
+        List<List<String>> lines = new ArrayList<List<String>>();
+        List<Node> level = new ArrayList<Node>();
+        List<Node> next = new ArrayList<Node>();
+
+        level.add(root);
+        int nn = 1;
+        int widest = 0;
+        while (nn != 0) {
+            List<String> line = new ArrayList<String>();
+            nn = 0;
+            for (Node n : level) {
+                if (n == null) {
+                    line.add(null);
+                    next.add(null);
+                    next.add(null);
+                } else {
+                    String aa = Integer.toString(n.key);
+                    line.add(aa);
+                    if (aa.length() > widest) widest = aa.length();
+                    next.add(n.left);
+                    next.add(n.right);
+                    if (n.left != null) nn++;
+                    if (n.right != null) nn++;
+                }
+            }
+
+            if (widest % 2 == 1) widest++;
+            lines.add(line);
+            List<Node> tmp = level;
+            level = next;
+            next = tmp;
+            next.clear();
+        }
+
+        int piece = lines.get(lines.size() - 1).size() * (widest + 4);
+        for (int i = 0; i < lines.size(); i++) {
+            List<String> line = lines.get(i);
+            int hpw = (int) Math.floor(piece / 2f) - 1;
+            if (i > 0) {
+                for (int j = 0; j < line.size(); j++) {
+                    char c = ' ';
+                    if (j % 2 == 1) {
+                        if (line.get(j - 1) != null) {
+                            c = (line.get(j) != null) ? '┴' : '┘';
+                        } else {
+                            if (j < line.size() && line.get(j) != null) c = '└';
+                        }
+                    }
+                    System.out.print(c);
+                    if (line.get(j) == null) {
+                        for (int k = 0; k < piece - 1; k++) {
+                            System.out.print(" ");
+                        }
+                    } else {
+                        for (int k = 0; k < hpw; k++) {
+                            System.out.print(j % 2 == 0 ? " " : "─");
+                        }
+                        System.out.print(j % 2 == 0 ? "┌" : "┐");
+                        for (int k = 0; k < hpw; k++) {
+                            System.out.print(j % 2 == 0 ? "─" : " ");
+                        }
+                    }
+                }
+                System.out.println();
+            }
+
+            for (int j = 0; j < line.size(); j++) {
+                String f = line.get(j);
+                if (f == null) f = "";
+                int gap1 = (int) Math.ceil(piece / 2f - f.length() / 2f);
+                int gap2 = (int) Math.floor(piece / 2f - f.length() / 2f);
+                for (int k = 0; k < gap1; k++) {
+                    System.out.print(" ");
+                }
+                System.out.print(f);
+                for (int k = 0; k < gap2; k++) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+
+            piece /= 2;
+        }
+    }
+
+    private int dept(Node node) {
+        int i = 0;
+        if (node != null) {
+            deeper(node, ++i);
+        }
+        return depth;
+    }
+
+    private void deeper(Node node, int i) {
+        if (node != null) {
+            if (i > depth) {
+                depth = i;
+            }
+            i++;
+            deeper(node.left, i);
+            deeper(node.right, i);
+        }
     }
 
     /**
      * Dodawanie elementów
      */
     public void insert(int key) {
-        if (root == null)
+        if (root == null) {
             root = new Node(key);
-        else {
+        } else {
             Node actual = root;
             Node parent = null;
             while (actual != null) {
@@ -173,17 +298,18 @@ public class BST {
         if (node != null) {
             postOrder(node.left);
             postOrder(node.right);
-            System.out.print(node.key + ", ");
+            System.out.print(node.key);
             if (node.left != null)
-                System.out.print(node.left.key + ", ");
+                System.out.print(node.left.key + "˦");
             else
-                System.out.print("-, ");
+                System.out.print(" ");
             if (node.right != null)
                 System.out.println(node.right.key);
             else
                 System.out.println("-");
         }
     }
+
     public void remove (Integer key, Node pos)
     {
         if (pos == null) return;
