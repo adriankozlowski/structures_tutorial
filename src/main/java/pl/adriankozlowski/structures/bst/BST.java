@@ -12,8 +12,16 @@ public class BST {
         bst.insert(8);
         bst.insert(6);
         bst.insert(7);
+        bst.insert(10);
+        bst.insert(4);
         bst.insert(5);
         bst.insert(9);
+        bst.insert(19);
+        bst.insert(1);
+        bst.insert(12);
+        bst.insert(21);
+        bst.insert(13);
+        bst.insert(11);
         int d = bst.dept(bst.root);
         print(bst.root);
     }
