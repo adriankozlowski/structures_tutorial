@@ -9,7 +9,6 @@ public class BST {
 
     public static void main(String[] args) {
         BST bst = new BST();
-        bst.insert(8);
         bst.insert(6);
         bst.insert(7);
         bst.insert(10);
@@ -23,7 +22,8 @@ public class BST {
         bst.insert(13);
         bst.insert(11);
         int d = bst.dept(bst.root);
-        print(bst.root);
+//        print(bst.root);
+        bst.preOrder(bst.root);
     }
 
     /**
@@ -285,15 +285,6 @@ public class BST {
     public void preOrder(Node node) {
         if (node != null) {
             System.out.print(node.key + ", ");
-            if (node.left != null)
-                System.out.print(node.left.key + ", ");
-            else
-                System.out.print("-, ");
-            if (node.right != null)
-                System.out.println(node.right.key);
-            else
-                System.out.println("-");
-
             preOrder(node.left);
             preOrder(node.right);
         }
@@ -307,14 +298,6 @@ public class BST {
             postOrder(node.left);
             postOrder(node.right);
             System.out.print(node.key);
-            if (node.left != null)
-                System.out.print(node.left.key + "˦");
-            else
-                System.out.print(" ");
-            if (node.right != null)
-                System.out.println(node.right.key);
-            else
-                System.out.println("-");
         }
     }
 
