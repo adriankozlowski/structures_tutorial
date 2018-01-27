@@ -21,9 +21,10 @@ public class BST {
         bst.insert(21);
         bst.insert(13);
         bst.insert(11);
-        int d = bst.dept(bst.root);
-//        print(bst.root);
-        bst.preOrder(bst.root);
+//        int d = bst.dept(bst.root);
+        print(bst.root);
+        Node node = bst.recursiveSearch(bst.root, 7);
+        System.out.println(node.key);
     }
 
     /**
@@ -266,6 +267,19 @@ public class BST {
         else
             parent.right = tmp;
         return node;
+    }
+
+    public Node recursiveSearch(Node node, int searchKey) {
+        Node nodeLeft = null;
+        Node noreRight = null;
+        if (node != null) {
+            if (node.key == searchKey) {
+                return node;
+            }
+            nodeLeft = recursiveSearch(node.left, searchKey);
+            noreRight = recursiveSearch(node.right, searchKey);
+        }
+        return nodeLeft != null ? nodeLeft : noreRight;
     }
 
     /**
